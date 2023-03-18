@@ -19,6 +19,19 @@ git remote add origin https://gitlab.lrz.de/tum-autonomousdriving/udacity_autono
 git branch -M main
 git push -uf origin main
 ```
+## Instruction
+1. Environment create
+```
+    conda create -n udacity python=3.8
+```
+2. Activate environment
+```
+    conda activate udacity
+```
+3. Install requirements
+```
+    pip install -r requirements.txt
+```
 
 ## Integrate with your tools
 

@@ -26,7 +26,7 @@ from io import BytesIO
 #load our saved model
 import torch
 from torch.autograd import Variable
-from network_model import model_cnn
+from network_model import model_cnn, Model
 
 import cv2
 
@@ -42,8 +42,8 @@ model = None
 prev_image_array = None
 
 #set min/max speed for our autonomous car
-MAX_SPEED = 25
-MIN_SPEED = 10
+MAX_SPEED = 30
+MIN_SPEED = 15
 
 #and a speed limit
 speed_limit = MAX_SPEED
@@ -120,8 +120,9 @@ def send_control(steering_angle, throttle):
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Remote Driving')
     parser.add_argument(
-        'model_weights',
+        '--model_weights',
         type=str,
+        default='models/model_weights.pth',
         help='Path to model h5 file. Model should be on the same path.'
     )
     parser.add_argument(
@@ -134,7 +135,8 @@ if __name__ == '__main__':
     args = parser.parse_args()
 
     #load model
-    model = model_cnn().cuda()
+    #model = model_cnn().cuda()
+    model = Model().cuda()
     model.load_state_dict(torch.load(args.model_weights))
     model.eval()
 

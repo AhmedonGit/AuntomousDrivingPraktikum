@@ -1,1 +1,7 @@
 __pycache__/
+*.jpg
+*.png
+simulator-windows-64/
+log/
+.idea/
+models/

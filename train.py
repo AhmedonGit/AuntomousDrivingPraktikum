@@ -1,10 +1,3 @@
-"""
-  *  @copyright (c) 2020 Charan Karthikeyan P V, Nagireddi Jagadesh Nischal
-  *  @file    train.py
-  *  @author  Charan Karthikeyan P V, Nagireddi Jagadesh Nischal
-  *
-  *  @brief Main file to train and evaluate the model.  
- """
 import os
 import time
 import itertools
@@ -19,7 +12,7 @@ from torch.utils.data import DataLoader
 from tensorboard_logger import configure, log_value
 from torch.utils.data.sampler import RandomSampler, SequentialSampler
 import matplotlib.pyplot as plt
-from network_model import model_cnn
+from network_model import model_cnn, resnet_model
 from data_extractor import Features
 import utils
 import argparse
@@ -178,6 +171,7 @@ def eval_model(model,dataset,num_samples):
 def main(args):
 	#build and import the network model.
     model = model_cnn()
+    #model = resnet_model()
     #Check for cuda availability
     if torch.cuda.is_available():
         model = model.cuda()
@@ -214,7 +208,8 @@ def main(args):
 """
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
-    parser.add_argument('-d', help='data directory',        dest='data_dir',          type=str,   default='data')
+    parser.add_argument('-d', help='data directory',        dest='data_dir',          type=str,   default='C:/Users/zhouliguo/Desktop/simulator-windows-64/data')
+    #parser.add_argument('-d', help='data directory',        dest='data_dir',          type=str,   default='data')
     parser.add_argument('-m', help='model directory',       dest='model_dir',         type=str,   default='models')
     parser.add_argument('-t', help='train size fraction',   dest='train_size',        type=float, default=0.8)
     parser.add_argument('-k', help='drop out probability',  dest='keep_prob',         type=float, default=0.5)
